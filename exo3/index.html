@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8"/>
     <title>Gestion API Vaccination</title>
-    <link rel="stylesheet" href="./appliCovidNational.css">
+    <link rel="stylesheet" href="./applivaccination.css">
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 </head>
 
@@ -25,21 +25,35 @@ Choisir le département à afficher :
 
     <button id  = "BoutonDep"  >Voir le département</button>
 </p>
+
 <br />
 <p id="dep">
 </p>
 
+Choisir la catégories d'âge ou le sexe mais pas les deux de toute façon : 
+<select name="listeCat" id="listecat">
+</select> --- 
+<select name="listeSex" id="listesex">
+</select>
+
+<br />
+<p id="select">
+</p>
+
+
 
 <p id="result"></p>
 
+<iframe src="https://public.opendatasoft.com/explore/embed/dataset/covid-19-france-vaccinations-age-sexe-dep/custom/?disjunctive.variable_label&sort=date&refine.variable_label=Femmes&refine.date=2021%2F06&dataChart=eyJxdWVyaWVzIjpbeyJjaGFydHMiOlt7InR5cGUiOiJwaWUiLCJmdW5jIjoiQVZHIiwieUF4aXMiOiJuX2NvbXBsZXQiLCJzY2llbnRpZmljRGlzcGxheSI6dHJ1ZSwiY29sb3IiOiJyYW5nZS1jdXN0b20iLCJwb3NpdGlvbiI6ImNlbnRlciJ9XSwieEF4aXMiOiJkYXRlIiwibWF4cG9pbnRzIjoiIiwidGltZXNjYWxlIjoieWVhciIsInNvcnQiOiIiLCJjb25maWciOnsiZGF0YXNldCI6ImNvdmlkLTE5LWZyYW5jZS12YWNjaW5hdGlvbnMtYWdlLXNleGUtZGVwIiwib3B0aW9ucyI6eyJkaXNqdW5jdGl2ZS52YXJpYWJsZV9sYWJlbCI6dHJ1ZSwic29ydCI6ImRhdGUiLCJyZWZpbmUudmFyaWFibGVfbGFiZWwiOlsiRmVtbWVzIiwiNDAtNDkiXSwicmVmaW5lLmRhdGUiOlsiMjAyMS8wNiJdfX0sInNlcmllc0JyZWFrZG93biI6IiIsInNlcmllc0JyZWFrZG93blRpbWVzY2FsZSI6IiJ9XSwiZGlzcGxheUxlZ2VuZCI6dHJ1ZSwiYWxpZ25Nb250aCI6dHJ1ZSwidGltZXNjYWxlIjoiIn0%3D&static=false&datasetcard=false" width="1000" height="900" frameborder="0"></iframe>
 
-<section id="maSection">
+
+<!-- <section id="maSection">
     <p class="AfficheTab">
-        <!-- affichage du tableau-->
+
 
     <table border="1" id="tabComplet" >
         <caption font-size="1.5em" fontweight="bold">Statistique sur le COVID</caption>
-        <thead id="titreTab">               <!-- en-tête -->
+        <thead id="titreTab">               
         <tr>
             <th>Dates</th>
             <th>Hospitailisés</th>
@@ -60,9 +74,9 @@ Choisir le département à afficher :
         <div id="chart_div2"></div>
         <div id="chart_div3"></div>
     </section>
-</section>
+</section> -->
 </div>
-<script src="appliCovidNational.js"></script>
+<script src="applivaccination.js"></script>
 
 </body>
-</html>
+</html>()

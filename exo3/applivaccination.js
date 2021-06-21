@@ -1,12 +1,17 @@
 var affichage = document.querySelector("#result");
 var affichageFr = document.querySelector("#nord");
 var affichageDep = document.querySelector("#dep");
+var affichageSelect = document.querySelector("#select");
 var nBoutonAffDep = document.querySelector("#BoutonDep");
 var tabDonn = document.querySelector("#tabDonnees");
 var tabComp = document.querySelector("#tabComplet");
+var selectCategories = document.querySelector("#listecat");
+var selectSexe = document.querySelector("#listesex");
 
 var couvComplet = "";
 var couv1 = "";
+var choixMessage = "";
+var depchoisi = "";
 
 var dateDonneesFr = "";
 var objCovidDate = "";
@@ -19,6 +24,8 @@ var nombreNewRea = new Array();
 var nombredeces = new Array();
 var nombregueris = new Array();
 var dejaFait = false;
+
+var urlcovidselect = "";
 
 var departements = [
   "Ain",
@@ -124,15 +131,50 @@ var departements = [
   "Mayotte",
 ];
 
+var sexe = [
+  "Hommes et femmes",
+  "Femmes",
+  "Hommes",
+];
+
+var ages = [
+  "Tous âges",
+  "18-24",
+  "25-29",
+  "30-39",
+  "40-49",
+  "50-59",
+  "60-64",
+  "65-69",
+  "70-74",
+  "75-79",
+  "80 et +",
+];
+
 for (i = 0; i < departements.length; i++) {
   // remplissage de la liste des départements
   optionItemDep = document.createElement("option");
   optionItemDep.appendChild(document.createTextNode(departements[i]));
   listedep.appendChild(optionItemDep);
 }
+for (i = 0; i < sexe.length; i++) {
+  // remplissage de la liste des départements
+  optionItemDep = document.createElement("option");
+  optionItemDep.appendChild(document.createTextNode(sexe[i]));
+  listesex.appendChild(optionItemDep);
+}
+for (i = 0; i < ages.length; i++) {
+  // remplissage de la liste des départements
+  optionItemDep = document.createElement("option");
+  optionItemDep.appendChild(document.createTextNode(ages[i]));
+  listecat.appendChild(optionItemDep);
+}
+
+
 
 var urlcovidFr =
-  "https://public.opendatasoft.com/api/records/1.0/search/?dataset=covid-19-france-vaccinations-age-sexe-dep&q=nord&lang=FR&rows=30&sort=date&facet=date&facet=variable&facet=variable_label&facet=dep_name&facet=reg_code&facet=reg_name&facet=dep_area_code&refine.date=2021%2F06&refine.variable_label=Tous+%C3%A2ges";
+  
+  "https://public.opendatasoft.com/api/records/1.0/search/?dataset=covid-19-france-vaccinations-age-sexe-dep&q=&sort=date&facet=date&facet=variable&facet=variable_label&facet=dep_name&facet=reg_code&facet=reg_name&facet=dep_area_code&refine.dep_name=Nord&refine.date=2021%2F06&refine.variable_label=Tous+%C3%A2ges"
 fetch(urlcovidFr)
   .then(function (response) {
     response
@@ -159,13 +201,15 @@ fetch(urlcovidFr)
   .catch((error) => alert("Erreur : " + error));
 
 nBoutonAffDep.addEventListener("click", AfficheDep);
+selectCategories.addEventListener("change", modifSelecteurCat);
+selectSexe.addEventListener("change", modifSlecteurSex )
 
 async function AfficheDep() {
-  var depChoisi = departements[listedep.selectedIndex];
+  depChoisi = departements[listedep.selectedIndex];
   var urlcovidDep =
-    "https://public.opendatasoft.com/api/records/1.0/search/?dataset=covid-19-france-vaccinations-age-sexe-dep&q=" +
-    depChoisi +
-    "&lang=FR&rows=30&sort=date&facet=date&facet=variable&facet=variable_label&facet=dep_name&facet=reg_code&facet=reg_name&facet=dep_area_code&refine.date=2021%2F06&refine.variable_label=Tous+%C3%A2ges";
+  "https://public.opendatasoft.com/api/records/1.0/search/?dataset=covid-19-france-vaccinations-age-sexe-dep&q=&sort=date&facet=date&facet=variable&facet=variable_label&facet=dep_name&facet=reg_code&facet=reg_name&facet=dep_area_code&refine.dep_name="+
+  depChoisi+"&refine.date=2021%2F06&refine.variable_label=Tous+%C3%A2ges"
+    
   console.log(urlcovidDep);
   fetch(urlcovidDep)
     .then(function (response) {
@@ -184,7 +228,7 @@ async function AfficheDep() {
             date1Fr.toLocaleDateString("fr-FR") +
             " : Dans le " +
             depChoisi +
-            " il y a: " +
+            " il y a : " +
             couv1 +
             " % de la population qui ont reçu une première dose de vaccin et " +
             couvComplet +
@@ -195,6 +239,91 @@ async function AfficheDep() {
     .catch((error) => alert("Erreur : " + error));
 }
 //remplissage du tableau
+function modifSelecteurCat() {
+  selectSexe.selectedIndex = 0;
+  depChoisi = departements[listedep.selectedIndex];
+  var catChoisi = ages[listecat.selectedIndex];
+  choixMessage = catChoisi;
+  
+  if (listecat.selectedIndex == 0)
+  {
+    urlcovidselect =
+    "https://public.opendatasoft.com/api/records/1.0/search/?dataset=covid-19-france-vaccinations-age-sexe-dep&q=&sort=date&facet=date&facet=variable&facet=variable_label&facet=dep_name&facet=reg_code&facet=reg_name&facet=dep_area_code&refine.dep_name="+
+    depChoisi+"&refine.date=2021%2F06&refine.variable_label=Tous+%C3%A2ges";
+  }else{
+    choixMessage = catChoisi + " ans";
+    if (listecat.selectedIndex == 10){
+      catChoisi = "80+et+%2B";
+    }
+    urlcovidselect =
+    "https://public.opendatasoft.com/api/records/1.0/search/?dataset=covid-19-france-vaccinations-age-sexe-dep&q=&sort=date&facet=date&facet=variable&facet=variable_label&facet=dep_name&facet=reg_code&facet=reg_name&facet=dep_area_code&refine.dep_name="+
+    depChoisi+"&refine.date=2021%2F06&refine.variable_label="+ catChoisi;
+  }
+  affichageDonnees();
+}
+
+function modifSlecteurSex() {
+selectCategories.selectedIndex = 0;
+depChoisi = departements[listedep.selectedIndex];
+var sexChoisi = sexe[listesex.selectedIndex];
+choixMessage = sexChoisi;
+if (listesex.selectedIndex == 0){
+  urlcovidselect =
+  "https://public.opendatasoft.com/api/records/1.0/search/?dataset=covid-19-france-vaccinations-age-sexe-dep&q=&sort=date&facet=date&facet=variable&facet=variable_label&facet=dep_name&facet=reg_code&facet=reg_name&facet=dep_area_code&refine.dep_name="+
+  depChoisi+"&refine.date=2021%2F06&refine.variable_label=Hommes+et+femmes";
+}else{
+  urlcovidselect =
+  "https://public.opendatasoft.com/api/records/1.0/search/?dataset=covid-19-france-vaccinations-age-sexe-dep&q=&sort=date&facet=date&facet=variable&facet=variable_label&facet=dep_name&facet=reg_code&facet=reg_name&facet=dep_area_code&refine.dep_name="+
+  depChoisi+"&refine.date=2021%2F06&refine.variable_label="+ sexChoisi;
+}
+affichageDonnees();
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+function affichageDonnees()
+{
+  fetch(urlcovidselect)
+    .then(function (response) {
+      response
+        .text()
+        .then(function (covidSelect) {
+          var objCovidSelect = JSON.parse(covidSelect);
+
+          console.log(objCovidSelect.records[0].fields.couv_complet);
+
+          couvComplet = objCovidSelect.records[0].fields.couv_complet;
+          couv1 = objCovidSelect.records[0].fields.couv_dose1;
+          dateDonneesFr = objCovidSelect.records[0].fields.date;
+          var date1Fr = new Date(dateDonneesFr);
+          affichageSelect.innerHTML =
+            date1Fr.toLocaleDateString("fr-FR") +
+            " : Dans le " +
+            depChoisi +
+            ", pour la population de "+ choixMessage +", il y a : " +
+            couv1 +
+            " % de la population qui ont reçu une première dose de vaccin et " +
+            couvComplet +
+            " % a une couverture complète. ";
+        })
+        .catch((error) => alert("Erreur : " + error));
+    })
+    .catch((error) => alert("Erreur : " + error));
+}
+
+
+
 
 function RemplirTableau() {
   if (dejaFait === true) {
