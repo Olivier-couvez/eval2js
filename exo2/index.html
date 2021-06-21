@@ -1,0 +1,54 @@
+<!<!DOCTYPE HTML PUBLIC>
+
+<!--
+NOM DU SCRIPT : CHARTS_EX6
+REALISATION INFORMATIQUE : PK_GGH
+DATE DE CREATION : 08/02/2020
+DATE DE DERNIERE MODIFICATION : 
+OBJET : Utilisation d'un fichier csv comme source de données
+-->
+
+<!-- Début script HTML -->
+<html>
+  <!-- Début entête script HTML -->
+
+  <head>
+    <!-- Balise meta -->
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+    <!-- Chargement de l'API Google Chart -->
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+
+    <!-- Chargement du module visualization en version 1 avec en option le package corechart -->
+    <script type="text/javascript">
+      google.load("visualization", "1", {
+        packages: ["corechart", "controls"],
+      });
+    </script>
+
+    <!-- Titre du script HTML -->
+    <title>Utilisation d'un fichier csv comme source de données</title>
+  </head>
+
+  <!-- Début section body du script HTML -->
+
+  <body>
+    <!-- Titre du traitement -->
+    <p align="center">Utilisation d'un fichier CSV <br /></p>
+
+    <label for="file"> Choisissez un fichier csv</label>
+    <input type="file" id="file" />
+    <pre id="resultat"></pre>
+
+    <h4>Affichage du diagramme</h4>
+    <h4></h4>
+    <!-- Début script JavaScript -->
+    <script src="donneescsv.js"></script>
+    <div id="dashoard">
+      <!-- Définition de la division d'affichage du graphique -->
+      <div id="curseur"></div>
+      <div id="categories"></div>
+      <div id="diagramme" style="width: 1400px; height: 1000px"></div>
+    </div>
+  </body>
+</html>

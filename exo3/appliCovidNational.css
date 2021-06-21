@@ -1,0 +1,64 @@
+/*********** Fixer le style global ******************/
+html, body{
+    margin: 0;
+    padding: 0;
+    font-family: "Century Gothic",Arial, Verdana, sans-serif;
+    font-size: 0.625rem;
+    background-color: powderblue;
+    color: black;
+}
+
+.container {
+    font-size: 1.6rem;
+}
+
+.heading{
+    text-align: center;
+}
+
+caption {
+    caption-side: top;
+    font-size: xx-large;
+    font-weight: bold;
+}
+
+.chart{
+    display: grid;
+    grid-template-columns: auto auto;
+    grid-template-rows: auto auto;
+    grid-gap: 2rem;
+}
+
+.chart_div{
+    grid-column: 1;
+    grid-row: 1;
+}
+
+.chart_div1{
+    grid-column: 2;
+    grid-row: 1;
+}
+
+.chart_div2{
+    grid-column: 1;
+    grid-row: 2;
+}
+
+.chart_div3{
+    grid-column: 2;
+    grid-row: 2;
+}
+
+.national{
+    text-align: justify;
+}
+
+table {
+    border-spacing: 0px;
+}
+table, th, td {
+    border: 1px solid black;
+}
+
+
+.tab

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8"/>
+    <title>Gestion API Vaccination</title>
+    <link rel="stylesheet" href="./appliCovidNational.css">
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+</head>
+
+</head>
+
+<body>
+<div class="container">
+<h1 class="heading">API vaccinations</h1>
+<p>
+</p>
+
+<p id="nord">
+</p>
+
+<p>
+Choisir le département à afficher :
+<select name="listeDep" id="listedep">
+</select>
+
+    <button id  = "BoutonDep"  >Voir le département</button>
+</p>
+<br />
+<p id="dep">
+</p>
+
+
+<p id="result"></p>
+
+
+<section id="maSection">
+    <p class="AfficheTab">
+        <!-- affichage du tableau-->
+
+    <table border="1" id="tabComplet" >
+        <caption font-size="1.5em" fontweight="bold">Statistique sur le COVID</caption>
+        <thead id="titreTab">               <!-- en-tête -->
+        <tr>
+            <th>Dates</th>
+            <th>Hospitailisés</th>
+            <th>Réanimations</th>
+            <th>Nouvelles Hospitalisation</th>
+            <th>Nouvelles Réanimations</th>
+            <th>Décès</th>
+            <th>Guéris</th>
+        </tr>
+        </thead>
+        <tbody id="tabDonnees" >
+        </tbody>
+    </table>
+    </p>
+    <section class="chart">
+        <div id="chart_div"></div>
+        <div id="chart_div1"></div>
+        <div id="chart_div2"></div>
+        <div id="chart_div3"></div>
+    </section>
+</section>
+</div>
+<script src="appliCovidNational.js"></script>
+
+</body>
+</html>
